@@ -1,25 +1,21 @@
 class Solution {
     public int[] findErrorNums(int[] nums) {
-        int[] temp = new int[nums.length];
-        for (int i = 0; i < nums.length; i++) {
-            temp[i] = i + 1;
+        int temp[] = new int[nums.length];
+        int result[] = new int[2];
+
+        for(int i:nums){
+            temp[i-1]++;
         }
-        int duplicate = 0;
-        int missing = 0;
-        for (int i = 0; i < nums.length; i++) {
-            int count = 0;
-            for (int j = 0; j < nums.length; j++) {
-                if (nums[j] == temp[i]) {
-                    count++;
-                }
+
+        for (int i=0; i<temp.length; i++){
+            if(temp[i]==2){
+                result[0]= i+1;
             }
-            if (count == 2) {
-                duplicate = temp[i];
-            }
-            if (count == 0) {
-                missing = temp[i];
+            if(temp[i]==0){
+                result[1]=i+1;
             }
         }
-        return new int[]{duplicate, missing};
+
+        return result;
     }
 }
